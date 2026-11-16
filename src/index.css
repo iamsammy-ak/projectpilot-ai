@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Instrument Sans Variable", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+
+  /* Electric violet — the primary accent */
+  --color-brand-50: #f4f1ff;
+  --color-brand-100: #e9e3ff;
+  --color-brand-200: #d5caff;
+  --color-brand-300: #b6a3ff;
+  --color-brand-400: #9475ff;
+  --color-brand-500: #7650ff;
+  --color-brand-600: #6238f5;
+  --color-brand-700: #5229d6;
+  --color-brand-800: #4423ad;
+  --color-brand-900: #391f8a;
+
+  /* Blue — the secondary accent */
+  --color-azure-50: #eef4ff;
+  --color-azure-100: #dbe7ff;
+  --color-azure-400: #5a8cff;
+  --color-azure-500: #2f6bff;
+  --color-azure-600: #1f55e0;
+  --color-azure-700: #1a45b8;
+
+  /* Text and structure */
+  --color-ink-900: #131a2e;
+  --color-ink-700: #333c56;
+  --color-ink-600: #4a5471;
+  --color-ink-500: #636d88;
+  --color-ink-400: #8a92a8;
+  --color-ink-300: #b5bccc;
+  --color-line: #e3e6ef;
+  --color-line-soft: #eef0f6;
+  --color-canvas: #f5f6fa;
+
+  /* Sidebar */
+  --color-navy-950: #0a0f1f;
+  --color-navy-900: #0e1529;
+  --color-navy-800: #172039;
+  --color-navy-700: #232e4f;
+  --color-navy-300: #a4aecb;
+  --color-navy-400: #7c88ab;
+
+  --shadow-card: 0 1px 2px rgb(19 26 46 / 0.04);
+  --shadow-pop: 0 16px 40px -12px rgb(19 26 46 / 0.22), 0 2px 8px rgb(19 26 46 / 0.06);
+  --shadow-drawer: -16px 0 40px -16px rgb(19 26 46 / 0.2);
+
+  --animate-rise: rise 0.18s ease-out;
+  --animate-slide-in: slide-in 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+  --animate-fade: fade 0.15s ease-out;
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slide-in {
+    from { transform: translateX(24px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    margin: 0;
+    background: var(--color-canvas);
+    color: var(--color-ink-900);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  button, [role="button"], summary, select, label[for] { cursor: pointer; }
+  button:disabled { cursor: not-allowed; }
+  :focus-visible {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  input:focus-visible, select:focus-visible, textarea:focus-visible { outline: none; }
+  ::selection { background: var(--color-brand-200); }
+
+  * { scrollbar-width: thin; scrollbar-color: #cfd4e0 transparent; }
+  .on-navy * { scrollbar-color: #2b3757 transparent; }
+
+  input[type="number"]::-webkit-inner-spin-button { opacity: 0.4; }
+}
+
+@utility no-spin {
+  appearance: textfield;
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+  }
+}
+
+@utility tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Printing a report: keep only the report sheet. */
+@media print {
+  body { background: #fff; }
+  .no-print { display: none !important; }
+  .print-sheet { border: 0 !important; box-shadow: none !important; padding: 0 !important; }
+  main { overflow: visible !important; height: auto !important; }
+}
